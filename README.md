@@ -1,4 +1,4 @@
-# App to practice media sharing (photos, song albums) between users
+# App to practice media sharing (albums of photos) between users
 
 To start:
 
