@@ -13,7 +13,7 @@ interface ButtonProps {
   [rest: string]: any;
 }
 
-function Button({
+export function Button({
   children,
   primary,
   secondary,
@@ -78,5 +78,3 @@ Button.propTypes = {
     }
   },
 };
-
-export default Button;

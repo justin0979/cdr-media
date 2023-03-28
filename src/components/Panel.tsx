@@ -7,7 +7,7 @@ interface PanelProps {
   [rest: string]: any;
 }
 
-function Panel({ children, className, ...rest }: PanelProps) {
+export function Panel({ children, className, ...rest }: PanelProps) {
   const finalClassNames = classNames(
     "border rounded p-3 shadow bg-white w-full",
     className,
@@ -19,5 +19,3 @@ function Panel({ children, className, ...rest }: PanelProps) {
     </div>
   );
 }
-
-export default Panel;
