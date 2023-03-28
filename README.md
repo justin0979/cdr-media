@@ -1,6 +1,8 @@
 # App to practice media sharing (photos, song albums) between users
 
-For `tailwindcss` install and setup:
+<details>
+
+<summary><strong>For `tailwindcss` install and setup</strong></summary>
 
 In terminal:
 
@@ -46,3 +48,5 @@ import ReactDOM from "react-dom/client";
 import "./input.css";
 import "./App";
 ```
+
+</details>
