@@ -1,5 +1,13 @@
 # App to practice media sharing (photos, song albums) between users
 
+To start:
+
+```sh
+npm i
+npm run start
+npm run start:server
+```
+
 <details>
 
 <summary><strong>For `tailwindcss` install and setup</strong></summary>
