@@ -11,17 +11,22 @@ const usersSlice = createSlice({
   initialState: {
     data: [] as User[],
     isLoading: false,
-    error: null,
+    error: null || {},
   },
   reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchUsers.pending, (state, action) => {
-        // Update our state object however appropriate to show the user what
-        // we are loading
+        state.isLoading = true;
       })
-      .addCase(fetchUsers.fulfilled, (state, action) => {})
-      .addCase(fetchUsers.rejected, (state, action) => {});
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error;
+      });
   },
 });
 
