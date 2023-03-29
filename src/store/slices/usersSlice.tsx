@@ -1,9 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface User {
+  id: number;
+  name: string;
+}
+
 const usersSlice = createSlice({
   name: "users",
   initialState: {
-    data: [],
+    data: [] as User[],
+    isLoading: false,
+    error: null,
   },
   reducers: {},
 });
