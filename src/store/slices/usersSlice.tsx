@@ -17,7 +17,7 @@ const usersSlice = createSlice({
   initialState: {
     data: [] as User[],
     isLoading: false,
-    error: null || {},
+    error: null as null | {},
   },
   reducers: {},
   extraReducers(builder) {
