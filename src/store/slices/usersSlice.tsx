@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchUsers } from "../thunks";
 
-interface User {
+export interface User {
   id: number;
   name: string;
 }
