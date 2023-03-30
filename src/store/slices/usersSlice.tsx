@@ -6,6 +6,12 @@ export interface User {
   name: string;
 }
 
+export interface UsersState {
+  data: User[];
+  isLoading: boolean;
+  error: null | {};
+}
+
 const usersSlice = createSlice({
   name: "users",
   initialState: {
