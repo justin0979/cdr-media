@@ -16,16 +16,22 @@ export function UsersList() {
   }, []);
 
   if (isLoading) {
-    return <Skeleton times={6} className="h-10 w-full" />;
+    return <Skeleton times={data.length} className="h-10 w-full" />;
   }
 
   if (error) {
     return <div>Error fetching data...</div>;
   }
 
-  return (
-    <div>
-      <h1>{data.length}</h1>
-    </div>
-  );
+  const renderedUsers = data.map((user) => {
+    return (
+      <div className="mb-2 border rounded" key={user.id}>
+        <div className="flex p-2 justify-between items-center cursor-pointer">
+          {user.name}
+        </div>
+      </div>
+    );
+  });
+
+  return <div>{renderedUsers}</div>;
 }
