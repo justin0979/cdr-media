@@ -5,9 +5,15 @@ import { Button } from "./Button";
 import { Skeleton } from "./Skeleton";
 
 export function UsersList() {
-  // `useState()` is used here as an alternate option to using Redux Toolkit Query
+  /*
+   * `useState()` is used here as an alternate option to using Redux Toolkit Query
+   */
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [loadingUsersError, setLoadingUsersError] = useState<null | {}>(
+    null,
+  );
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
+  const [creatingUserError, setCreatingUserError] = useState<null | {}>(
     null,
   );
   const dispatch = useDispatch<AppDispatch>();
@@ -30,7 +36,11 @@ export function UsersList() {
   }, []);
 
   const handleUserAdd = () => {
-    dispatch(addUser());
+    setIsCreatingUser(true);
+    dispatch(addUser())
+      .unwrap()
+      .catch((err) => setCreatingUserError(err))
+      .finally(() => setIsCreatingUser(false));
   };
 
   if (isLoadingUsers) {
@@ -55,7 +65,12 @@ export function UsersList() {
     <div>
       <div className="flex flex-row justify-between m-3">
         <h1 className="m-2 text-xl">Users</h1>
-        <Button onClick={handleUserAdd}>+ Add User</Button>
+        {isCreatingUser ? (
+          "Creating User..."
+        ) : (
+          <Button onClick={handleUserAdd}>+ Add User</Button>
+        )}
+        {creatingUserError && "Error creating user..."}
       </div>
       {renderedUsers}
     </div>
