@@ -27,7 +27,8 @@ function useThunk(thunk: any) {
   }, [dispatch, thunk]);
   /*
    * without `as const`, will give error 'TS2349: This expression is not callable'
-   * see https://github.com/microsoft/TypeScript/issues/35423
+   * see https://www.github.com/microsoft/TypeScript/issues/35423
+   * see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions
    */
   return [runThunk, isLoading, error] as const;
 }
