@@ -25,8 +25,10 @@ function useThunk(thunk: any) {
       .catch((err: any) => setError(err))
       .finally(() => setIsLoading(false));
   }, [dispatch, thunk]);
-
-  // without `as const`, will give error 'TS2349: This expression is not callable'
+  /*
+   * without `as const`, will give error 'TS2349: This expression is not callable'
+   * see https://github.com/microsoft/TypeScript/issues/35423
+   */
   return [runThunk, isLoading, error] as const;
 }
 
