@@ -38,7 +38,6 @@ export function UsersList() {
     useThunk(fetchUsers);
   const [doCreateUser, isCreatingUser, creatingUserError] =
     useThunk(addUser);
-  const dispatch = useDispatch<AppDispatch>();
   const { data } = useSelector((state: { users: UsersState }) => {
     return state.users;
   });
