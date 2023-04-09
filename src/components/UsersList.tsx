@@ -36,10 +36,8 @@ function useThunk(thunk: any) {
 export function UsersList() {
   const [doFetchUsers, isLoadingUsers, loadingUsersError] =
     useThunk(fetchUsers);
-  const [isCreatingUser, setIsCreatingUser] = useState(false);
-  const [creatingUserError, setCreatingUserError] = useState<null | {}>(
-    null,
-  );
+  const [doCreateUser, isCreatingUser, creatingUserError] =
+    useThunk(addUser);
   const dispatch = useDispatch<AppDispatch>();
   const { data } = useSelector((state: { users: UsersState }) => {
     return state.users;
@@ -50,11 +48,7 @@ export function UsersList() {
   }, [doFetchUsers]);
 
   const handleUserAdd = () => {
-    setIsCreatingUser(true);
-    dispatch(addUser())
-      .unwrap()
-      .catch((err) => setCreatingUserError(err))
-      .finally(() => setIsCreatingUser(false));
+    doCreateUser();
   };
 
   if (isLoadingUsers) {
