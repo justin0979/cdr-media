@@ -12,10 +12,19 @@ export function useThunk(thunk: any) {
   const runThunk = useCallback(() => {
     setIsLoading(true);
     /*
-     * `dispatch` breaks the promise's .then().catch() executing `.then()` regardless
-     * of a success or failure. To get around this, use `.unwrap()`.
-     * `.finally()` is used to remove rendundant code of adding:
+     * `dispatch` breaks the promise's .then().catch() by automatically
+     *  executing `.then()` regardless of a success or failure.
+     *  To get around this, use `.unwrap()`.
+     *  `.finally()` is used to remove rendundant code of adding:
      *   `.then(() => setIsLoadingUsers(false)).catch((err) => isLoadingUsers(false))`
+     *   So it would look like:
+     *   dispatch(thunk())
+     *    .unwrap()
+     *    .then(() => setIsLoadingUsers(false))
+     *    .catch(err => {
+     *      setIsLoadingUsers(false);
+     *      setLoadingUsersError(err);
+     *    });
      */
     dispatch(thunk())
       .unwrap()
