@@ -42,7 +42,7 @@ export function UsersList() {
 
   return (
     <div>
-      <div className="flex flex-row justify-between m-3">
+      <div className="flex flex-row justify-between items-center m-3">
         <h1 className="m-2 text-xl">Users</h1>
         <Button loading={isCreatingUser} onClick={handleUserAdd}>
           + Add User
