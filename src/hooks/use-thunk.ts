@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
+import { User } from "../store";
 
 export function useThunk(thunk: any) {
   /*
@@ -9,28 +10,34 @@ export function useThunk(thunk: any) {
   const [error, setError] = useState<null | {}>(null);
   const dispatch = useDispatch();
 
-  const runThunk = useCallback(() => {
-    setIsLoading(true);
-    /*
-     * `dispatch` breaks the promise's .then().catch() by automatically
-     *  executing `.then()` regardless of a success or failure.
-     *  To get around this, use `.unwrap()`.
-     *  `.finally()` is used to remove rendundant code of adding:
-     *   `.then(() => setIsLoadingUsers(false)).catch((err) => isLoadingUsers(false))`
-     *   So it would look like:
-     *   dispatch(thunk())
-     *    .unwrap()
-     *    .then(() => setIsLoadingUsers(false))
-     *    .catch(err => {
-     *      setIsLoadingUsers(false);
-     *      setLoadingUsersError(err);
-     *    });
-     */
-    dispatch(thunk())
-      .unwrap()
-      .catch((err: any) => setError(err))
-      .finally(() => setIsLoading(false));
-  }, [dispatch, thunk]);
+  /*
+   *  user parameter is used only when deleting.
+   */
+  const runThunk = useCallback(
+    (user?: User) => {
+      setIsLoading(true);
+      /*
+       * `dispatch` breaks the promise's .then().catch() by automatically
+       *  executing `.then()` regardless of a success or failure.
+       *  To get around this, use `.unwrap()`.
+       *  `.finally()` is used to remove rendundant code of adding:
+       *   `.then(() => setIsLoadingUsers(false)).catch((err) => isLoadingUsers(false))`
+       *   So it would look like:
+       *   dispatch(thunk())
+       *    .unwrap()
+       *    .then(() => setIsLoadingUsers(false))
+       *    .catch(err => {
+       *      setIsLoadingUsers(false);
+       *      setLoadingUsersError(err);
+       *    });
+       */
+      dispatch(thunk(user))
+        .unwrap()
+        .catch((err: any) => setError(err))
+        .finally(() => setIsLoading(false));
+    },
+    [dispatch, thunk],
+  );
   /*
    * without `as const`, will give error 'TS2349: This expression is not callable'
    * see https://www.github.com/microsoft/TypeScript/issues/35423
