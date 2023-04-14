@@ -4,3 +4,4 @@ export * from "./UsersList";
 export * from "./Skeleton";
 export * from "./UsersListItem";
 export * from "./ExpandablePanel";
+export * from "./AlbumsList";
