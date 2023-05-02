@@ -5,6 +5,12 @@ interface User {
   name: string;
 }
 
+interface Album {
+  id: number;
+  title: string;
+  userId: number;
+}
+
 const albumsApi = createApi({
   reducerPath: "albums",
   baseQuery: fetchBaseQuery({
@@ -17,7 +23,7 @@ const albumsApi = createApi({
     // - if we named it getAlbums, name of hook: `albumsApi.useGetAlbumsQuery()`
     //                       ResultType QueryArg
     //                          v        v
-    fetchAlbums: builder.query<User[], User>({
+    fetchAlbums: builder.query<Album[], User>({
       // The goal of the below query function is to specify exactly how to make
       // the request
       query: (user) => ({
